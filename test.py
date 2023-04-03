@@ -35,7 +35,6 @@ spd = pokemon['stats'][5]['base_stat']
 
 print(f"HP: {hp}, ATTACK: {atk}, DEFENSE: {defense}, SPECIAL ATTACK: {sp_atk}, SPECIAL DEFENSE: {sp_defense}, SPEED: {spd}")
 
-
 #Test w/loop
 '''
 for i in range(0,5):
