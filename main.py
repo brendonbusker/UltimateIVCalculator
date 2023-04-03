@@ -33,9 +33,29 @@ class IVCalc:
         self.level_label.pack(side = "left")
         self.level_entry.pack(side = "left")
 
-        #Login Button
+        #Stats Label
+        self.hp_label = t.Label(self.stats_label_frame, text = "HP")
+        self.atk_label = t.Label(self.stats_label_frame, text = "ATK")
+        self.def_label = t.Label(self.stats_label_frame, text = "DEF")
+        self.spatk_label = t.Label(self.stats_label_frame, text = "SP ATK")
+        self.spdef_label = t.Label(self.stats_label_frame, text = "SP DEF")
+        self.spd_label = t.Label(self.stats_label_frame, text = "SPD")
+        self.hp_label.pack(side = "left")
+        self.atk_label.pack(side = "left")
+        self.def_label.pack(side = "left")
+        self.spatk_label.pack(side = "left")
+        self.spdef_label.pack(side = "left")
+        self.spd_label.pack(side = "left")
+        
+        #Enter Stats
+        
+
+
+
+        #Calculate Button
         self.login_button = t.Button(self.login_frame, text = "Login", command = self.access_database, width = 20)
         self.login_button.pack(side = "top")
+        
 
         #Pack Frames
         self.enter_pokemon_frame.pack()
