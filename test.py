@@ -18,7 +18,7 @@ ditto = response.json()
 print(ditto['stats'][0])
 print(ditto['stats'][0]['base_stat'])
 '''
-
+'''
 #Testing with user input now
 usr_input = input("Type pokemon name: ").lower()
 
@@ -39,8 +39,19 @@ iv = ((372/1.1 - 5) * 100) / 100 - 2 * 120 - 252/4
 print(iv)
 
 #Test w/loop
-'''
+
 for i in range(0,5):
     stat = pokemon['stats'][i]['base_stat']
     print(f"stats: {stat}")
 '''
+
+response = requests.get("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+
+pokemon = response.json()
+
+all_pokemon_list = []
+
+for i in range(0, len(pokemon['results'])):
+    all_pokemon_list.append(pokemon['results'][i]['name'].title())
+
+print(all_pokemon_list[999])
