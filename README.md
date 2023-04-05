@@ -10,5 +10,9 @@ I still plan to update this more in the future, but for now it is semi-functiona
 
 For best accuracy I would only really trust this tool's efficacy if your pokemon is about level 70+, as I don't have the calculator giving out an IV range right now.
 
+You'll find the .exe file in the dist folder named main.exe
+
+***Do not move main.exe from dist or it will not run, create a shortcut instead***
+
 Regardless, I'm quite proud of my progress and I hope to keep updating this more!
 
