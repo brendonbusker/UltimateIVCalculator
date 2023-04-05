@@ -14,7 +14,7 @@ For best accuracy I would only really trust this tool's efficacy if your pokemon
 
 You'll find the .exe file at dist/main/main.exe (I'll rename it from main.exe to UltimateIVCalculator.exe in the next update)
 
-***Do not move main.exe from dist or it will not run, create a shortcut instead***
+***Do not move main.exe from dist or it will not run, create a shortcut instead if you want to move it***
 
 Regardless, I'm quite proud of my progress and I hope to keep updating this more!
 
