@@ -44,7 +44,7 @@
  [],
  False,
  False,
- 1680655261,
+ 1680656760,
  [('runw.exe',
    'd:\\code\\python\\expopunchivtool\\ultimateivcalculator\\.venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')])
