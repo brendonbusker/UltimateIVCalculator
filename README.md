@@ -18,6 +18,6 @@ You'll find the .exe file at dist/main/main.exe (I'll rename it from main.exe to
 
 Regardless, I'm quite proud of my progress and I hope to keep updating this more!
 
-Screenshot:
+Screenshot (as of v1.1-alpha):
 ![UltimateIVCalcexample](https://user-images.githubusercontent.com/95665048/229965265-86f8bf83-a47d-40f4-b283-791064e5b222.PNG)
 
