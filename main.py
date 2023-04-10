@@ -19,11 +19,21 @@ from PIL import Image, ImageTk
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "green", "dark-blue"
 
+#Global Constant
 NATURES = ['Adamant', 'Bashful', 'Bold', 'Brave', 'Calm', 'Careful',
             'Docile', 'Gentle', 'Hardy', 'Hasty', 'Impish', 'Jolly', 'Lax',
             'Lonely', 'Mild', 'Modest', 'Naive', 'Naughty', 'Quiet', 'Quirky',
             'Rash', 'Relaxed', 'Sassy', 'Serious', 'Timid']
 
+#Global Variables
+pokelist_response = requests.get("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+all_pokelist = []
+pokelist = pokelist_response.json()
+
+for i in range(0, len(pokelist['results'])):
+    all_pokelist.append(pokelist['results'][i]['name'].title())
+
+#Changelog Constant
 CHANGELOG = '''Alpha 1.2
 
 changelog
@@ -56,6 +66,7 @@ future additions
 
 '''
 
+#Help Doc Constant
 HELP = '''Help Documentation
 
 Enter Pokemon Error
@@ -135,8 +146,9 @@ class CalcIV(customtkinter.CTk):
         self.calc_frame.grid(row=0, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
         self.pokemon_label = customtkinter.CTkLabel(self.calc_frame, text=" Enter Pokemon:")
         self.pokemon_label.grid(row=0, column=0, padx=(20,10), pady=(10,0))
-        self.pokemon_entry = customtkinter.CTkEntry(self.calc_frame)
-        self.pokemon_entry.grid(row=0,column=1, padx=10, pady=(10,0))
+        self.pokemon_combobox = customtkinter.CTkComboBox(self.calc_frame, values=all_pokelist)
+        self.pokemon_combobox.bind('<KeyRelease>', self.update_list)
+        self.pokemon_combobox.grid(row=0,column=1, padx=10, pady=(10,0))
         self.level_label = customtkinter.CTkLabel(self.calc_frame, text="Enter Level:", anchor="w")
         self.level_label.grid(row=1, column=0, padx=(0,10), pady=(10,0))
         self.level_entry = customtkinter.CTkEntry(self.calc_frame, width=38)
@@ -324,7 +336,6 @@ class CalcIV(customtkinter.CTk):
         self.colortheme_optionmenu.configure(state='disabled')
         self.nature_optionmenu.set("Adamant")
         self.level_entry.insert(0,100)
-        self.pokemon_entry.insert(0, "Bulbasaur")
         self.help_textbox.insert("0.0", HELP)
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
@@ -332,6 +343,20 @@ class CalcIV(customtkinter.CTk):
 
     def change_color_event(self, color: str):
         customtkinter.set_default_color_theme(color.lower())
+
+    def update_list(self, event):
+        typed = self.pokemon_combobox.get()
+        data = []
+        
+        if typed == '':
+            data = all_pokelist
+            self.pokemon_combobox.configure(values=data)
+        else:
+            for i in range(0, len(all_pokelist)):
+                if typed.lower() in all_pokelist[i].lower():
+                    data.append(all_pokelist[i])
+            self.pokemon_combobox.configure(values=data)
+            
 
     def reset_evs_event(self):
         self.ev_hp_var.set(0)
@@ -351,7 +376,7 @@ class CalcIV(customtkinter.CTk):
 
     def calcIV(self):
         #API
-        usr_input = self.pokemon_entry.get().lower()
+        usr_input = self.pokemon_combobox.get().lower()
         nature = self.nature_optionmenu.get().lower()
         poke_response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{usr_input}")
         nature_response = requests.get(f"https://pokeapi.co/api/v2/nature/{nature}")
