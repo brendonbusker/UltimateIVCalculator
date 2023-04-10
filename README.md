@@ -12,12 +12,12 @@ I still plan to update this more in the future, but for now it is semi-functiona
 
 For best accuracy I would only really trust this tool's efficacy if your pokemon is about level 70+, as I don't have the calculator giving out an IV range right now.
 
-You'll find the .exe file at dist/main/main.exe (I'll rename it from main.exe to UltimateIVCalculator.exe in the next update)
+You'll find the .exe file at dist/main/UltimateIVCalculator.exe
 
-***Do not move main.exe from dist or it will not run, create a shortcut instead if you want to move it***
+***Do not move UltimateIVCalculator.exe from dist or it will not run, create a shortcut instead if you want to move it***
 
 Regardless, I'm quite proud of my progress and I hope to keep updating this more!
 
-Screenshot (as of v1.1-alpha):
-![UltimateIVCalcexample](https://user-images.githubusercontent.com/95665048/229965265-86f8bf83-a47d-40f4-b283-791064e5b222.PNG)
+Screenshot (as of v1.2-alpha):
+![v1 2](https://user-images.githubusercontent.com/95665048/230831217-ed9560dd-00b9-4572-9906-023daf9dc68f.PNG)
 
