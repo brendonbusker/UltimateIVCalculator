@@ -18,6 +18,6 @@ You'll find the .exe file at dist/main/UltimateIVCalculator.exe
 
 Regardless, I'm quite proud of my progress and I hope to keep updating this more!
 
-Screenshot (as of v1.1-alpha):
+Screenshot (as of v1.2-alpha):
 ![v1 2](https://user-images.githubusercontent.com/95665048/230831217-ed9560dd-00b9-4572-9906-023daf9dc68f.PNG)
 
