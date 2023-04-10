@@ -10,4 +10,5 @@ origtest.py
 main1.py
 pokelist.txt
 ivtest.py
-build
+build/
+dist/
