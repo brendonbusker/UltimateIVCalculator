@@ -24,7 +24,18 @@ NATURES = ['Adamant', 'Bashful', 'Bold', 'Brave', 'Calm', 'Careful',
             'Lonely', 'Mild', 'Modest', 'Naive', 'Naughty', 'Quiet', 'Quirky',
             'Rash', 'Relaxed', 'Sassy', 'Serious', 'Timid']
 
-CHANGELOG = '''Alpha 1.1
+CHANGELOG = '''Alpha 1.2
+
+changelog
+-added clear ev button
+-added clear stats button
+-removed un-useable buttons and tabs
+-bulbasaur now default pokemon
+-added default and shiny image tabs
+-added help tab
+-changelog textbox now slightly longer
+
+Alpha 1.1
 
 changelog
 -expansive graphical overhaul
@@ -38,8 +49,8 @@ changelog
 
 future additions
 -autocomplete for entering in pokemon names
--clear ev button
--clear stats button
+-~~clear ev button~~
+-~~clear stats button~~
 -more info about pokemon next to base stats and ivs
 -etc.
 
