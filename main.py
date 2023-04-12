@@ -386,7 +386,12 @@ class CalcIV(customtkinter.CTk):
         nature = self.nature_optionmenu.get().lower()
         poke_response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{usr_input}")
         nature_response = requests.get(f"https://pokeapi.co/api/v2/nature/{nature}")
-        pokemon = poke_response.json()
+        
+        try:
+            pokemon = poke_response.json()
+        except:
+            tkinter.messagebox.showerror("Error - Pokemon Not Found", "Check spelling and re-enter pokemon, see combobox for valid options.")
+
         nature_dict = nature_response.json()
 
         #Set image
@@ -412,7 +417,7 @@ class CalcIV(customtkinter.CTk):
 
 
 
-        #Base Stats
+        #Base Stats 
         base_hp = pokemon['stats'][0]['base_stat']
         base_atk = pokemon['stats'][1]['base_stat']
         base_def = pokemon['stats'][2]['base_stat']
@@ -420,6 +425,7 @@ class CalcIV(customtkinter.CTk):
         base_spdef = pokemon['stats'][4]['base_stat']
         base_spd = pokemon['stats'][5]['base_stat']
 
+        
         #Pokemon Stats
         stat_hp = int(self.hp_entry.get())
         stat_atk = int(self.atk_entry.get())
