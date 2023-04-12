@@ -251,12 +251,12 @@ class CalcIV(customtkinter.CTk):
         self.iv_label = customtkinter.CTkLabel(self.iv_frame, text="Possible IVs", font=customtkinter.CTkFont(underline=True))
         self.iv_label.grid(row=0, column=2, padx=(10,10), pady=(0,0))
 
-        self.iv_hp_var = customtkinter.IntVar()
-        self.iv_atk_var = customtkinter.IntVar()
-        self.iv_def_var = customtkinter.IntVar()
-        self.iv_spatk_var = customtkinter.IntVar()
-        self.iv_spdef_var = customtkinter.IntVar()
-        self.iv_spd_var = customtkinter.IntVar()
+        self.iv_hp_var = customtkinter.StringVar()
+        self.iv_atk_var = customtkinter.StringVar()
+        self.iv_def_var = customtkinter.StringVar()
+        self.iv_spatk_var = customtkinter.StringVar()
+        self.iv_spdef_var = customtkinter.StringVar()
+        self.iv_spd_var = customtkinter.StringVar()
 
         self.iv_hp_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_hp_var)
         self.iv_hp_entry.grid(row=1, column=2, padx=2, pady=5)
@@ -337,6 +337,12 @@ class CalcIV(customtkinter.CTk):
         self.nature_optionmenu.set("Adamant")
         self.level_entry.insert(0,100)
         self.help_textbox.insert("0.0", HELP)
+        self.iv_hp_var.set("N/A")
+        self.iv_atk_var.set("N/A")
+        self.iv_def_var.set("N/A")
+        self.iv_spatk_var.set("N/A")
+        self.iv_spdef_var.set("N/A")
+        self.iv_spd_var.set("N/A")
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
@@ -482,12 +488,35 @@ class CalcIV(customtkinter.CTk):
         iv_spd = round(self.CalcStats(stat_spd, base_spd, ev_spd, level))
 
         #Set IVs to gui
-        self.iv_hp_var.set(iv_hp)
-        self.iv_atk_var.set(iv_atk)
-        self.iv_def_var.set(iv_def)
-        self.iv_spatk_var.set(iv_spatk)
-        self.iv_spdef_var.set(iv_spdef)
-        self.iv_spd_var.set(iv_spd)
+        if iv_hp < 0 or iv_hp > 31:
+            self.iv_hp_var.set("N/A")
+        else:
+            self.iv_hp_var.set(iv_hp)
+
+        if iv_atk < 0 or iv_atk > 31:
+            self.iv_atk_var.set("N/A")
+        else:
+            self.iv_atk_var.set(iv_atk)
+
+        if iv_def < 0 or iv_def > 31:
+            self.iv_def_var.set("N/A")
+        else:
+            self.iv_def_var.set(iv_def)
+
+        if iv_spatk < 0 or iv_spatk > 31:
+            self.iv_spatk_var.set("N/A")
+        else:
+            self.iv_spatk_var.set(iv_spatk)
+
+        if iv_spdef < 0 or iv_spdef > 31:
+            self.iv_spdef_var.set("N/A")
+        else:
+            self.iv_spdef_var.set(iv_spdef)
+
+        if iv_spd < 0 or iv_spd > 31:
+            self.iv_spd_var.set("N/A")
+        else:
+            self.iv_spd_var.set(iv_spd)
 
         # set base stats to gui
         self.base_hp_var.set(base_hp)
