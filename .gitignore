@@ -13,3 +13,4 @@ ivtest.py
 build/
 dist/
 main.spec
+build.txt
