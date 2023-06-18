@@ -34,7 +34,17 @@ for i in range(0, len(pokelist['results'])):
     all_pokelist.append(pokelist['results'][i]['name'].title())
 
 #Changelog Constant
-CHANGELOG = '''Alpha 1.2
+CHANGELOG = '''Beta 1.0
+
+changelog
+-finally into beta!
+-iv calculator now gives accurate ranges of pokemon ivs
+-autocomplete combobox now functional (begin typing and click box to see available pokemon)
+
+notes
+-nearing the final version of the calculator soon
+-only want to add some more niche things to fill up white space now
+-this calculator is essentially fully operational now (and always will be until pokemon changes their equations or PokeAPI stops updating)Alpha 1.2
 
 changelog
 -added clear ev button
@@ -78,15 +88,12 @@ Enter Pokemon Error
  pokemon has a form.
 -For example: "Giratina" will not  work, try "Giratina-Altered" or 
  "Giratina-Origin"
--Eventually will add an 
- autocomplete feature that will
- fix these issues.
+-Try the autocomplete,
+ start to type the name and click the
+ combobox on the side to see available pokemon
 
 IVs not 100% accurate
 ----------------------------------
--Right now it doesn't give a
- range of values for possible 
- IVs, will be added later.
 -Double check nature, stats
  and EVs entries.
 
@@ -258,17 +265,17 @@ class CalcIV(customtkinter.CTk):
         self.iv_spdef_var = customtkinter.StringVar()
         self.iv_spd_var = customtkinter.StringVar()
 
-        self.iv_hp_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_hp_var)
+        self.iv_hp_entry = customtkinter.CTkEntry(self.iv_frame, width=53, textvariable=self.iv_hp_var)
         self.iv_hp_entry.grid(row=1, column=2, padx=2, pady=5)
-        self.iv_atk_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_atk_var)
+        self.iv_atk_entry = customtkinter.CTkEntry(self.iv_frame, width=53, textvariable=self.iv_atk_var)
         self.iv_atk_entry.grid(row=2, column=2, padx=2, pady=5)
-        self.iv_def_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_def_var)
+        self.iv_def_entry = customtkinter.CTkEntry(self.iv_frame, width=53, textvariable=self.iv_def_var)
         self.iv_def_entry.grid(row=3, column=2, padx=2, pady=5)
-        self.iv_spatk_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_spatk_var)
+        self.iv_spatk_entry = customtkinter.CTkEntry(self.iv_frame, width=53, textvariable=self.iv_spatk_var)
         self.iv_spatk_entry.grid(row=4, column=2, padx=2, pady=5)
-        self.iv_spdef_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_spdef_var)
+        self.iv_spdef_entry = customtkinter.CTkEntry(self.iv_frame, width=53, textvariable=self.iv_spdef_var)
         self.iv_spdef_entry.grid(row=5, column=2, padx=2, pady=5)
-        self.iv_spd_entry = customtkinter.CTkEntry(self.iv_frame, width=50, textvariable=self.iv_spd_var)
+        self.iv_spd_entry = customtkinter.CTkEntry(self.iv_frame, width=53, textvariable=self.iv_spd_var)
         self.iv_spd_entry.grid(row=6, column=2, padx=2, pady=5)
 
         self.iv_label = customtkinter.CTkLabel(self.iv_frame, text="Base Stats", font=customtkinter.CTkFont(underline=True))
@@ -456,73 +463,83 @@ class CalcIV(customtkinter.CTk):
 
         #Adjust stats for nature
         if inc_stat == "special-attack":
-            stat_spatk = stat_spatk / 1.1
+            stat_spatk = int(stat_spatk / 1.1) + (stat_spatk % 1.1 > 0)
         
         elif inc_stat == "attack":
-            stat_atk = stat_atk / 1.1
+            stat_atk = int(stat_atk / 1.1) + (stat_atk % 1.1 > 0)
 
         elif inc_stat == "speed":
-            stat_spd = stat_spd / 1.1
+            stat_spd = int(stat_spd / 1.1) + (stat_spd % 1.1 > 0)
 
         elif inc_stat == "special-defense":
-            stat_spdef = stat_spdef / 1.1
+            stat_spdef = int(stat_spdef / 1.1) + (stat_spdef % 1.1 > 0)
 
         elif inc_stat == "defense":
-            stat_def = stat_def / 1.1
+            stat_def = int(stat_def / 1.1) + (stat_def % 1.1 > 0)
 
         if dec_stat == "special-attack":
-            stat_spatk = stat_spatk / 0.9
+            stat_spatk = int(stat_spatk / 0.9) + (stat_spatk % .9 > 0)
         
         elif dec_stat == "attack":
-            stat_atk = stat_atk / 0.9
+            stat_atk = int(stat_atk / 0.9) + (stat_atk % .9 > 0)
 
         elif dec_stat == "speed":
-            stat_spd = stat_spd / 0.9
+            stat_spd = int(stat_spd / 0.9) + (stat_spd % .9 > 0)
 
         elif dec_stat == "special-defense":
-            stat_spdef = stat_spdef / 0.9
+            stat_spdef = int(stat_spdef / 0.9) + (stat_spdef % .9 > 0)
 
         elif dec_stat == "defense":
-            stat_def = stat_def / 0.9
+            stat_def = int(stat_def / 0.9) + (stat_def % .9 > 0)
 
-        #Get IVs
-        iv_hp = round(self.CalcHp(stat_hp, base_hp, ev_hp, level))
-        iv_atk = round(self.CalcStats(stat_atk, base_atk, ev_atk, level))
-        iv_def = round(self.CalcStats(stat_def, base_def, ev_def, level))
-        iv_spatk = round(self.CalcStats(stat_spatk, base_spatk, ev_spatk, level))
-        iv_spdef = round(self.CalcStats(stat_spdef, base_spdef, ev_spdef, level))
-        iv_spd = round(self.CalcStats(stat_spd, base_spd, ev_spd, level))
+        #Get Min IVs
+        iv_hp_min = round(self.CalcIvHpMin(stat_hp, base_hp, ev_hp, level))
+        iv_atk_min = round(self.CalcIvStatsMin(stat_atk, base_atk, ev_atk, level))
+        iv_def_min = round(self.CalcIvStatsMin(stat_def, base_def, ev_def, level))
+        iv_spatk_min = round(self.CalcIvStatsMin(stat_spatk, base_spatk, ev_spatk, level))
+        iv_spdef_min = round(self.CalcIvStatsMin(stat_spdef, base_spdef, ev_spdef, level))
+        iv_spd_min = round(self.CalcIvStatsMin(stat_spd, base_spd, ev_spd, level))
 
+        #Get Max IVs
+        iv_hp_max = self.CalcIvHpMax(base_hp, iv_hp_min, ev_hp, level, stat_hp)
+        iv_atk_max = self.CalcIvStatsMax(base_atk, iv_atk_min, ev_atk, level, stat_atk)
+        iv_def_max = self.CalcIvStatsMax(base_def, iv_def_min, ev_def, level, stat_def)
+        iv_spatk_max = self.CalcIvStatsMax(base_spatk, iv_spatk_min, ev_spatk, level, stat_spatk)
+        iv_spdef_max = self.CalcIvStatsMax(base_spdef, iv_spdef_min, ev_spdef, level, stat_spdef)
+        iv_spd_max = self.CalcIvStatsMax(base_spd, iv_spd_min, ev_spd, level, stat_spd)
+
+        
         #Set IVs to gui
-        if iv_hp < 0 or iv_hp > 31:
+        if iv_hp_min < 0 or iv_hp_min > 31 or iv_hp_max < 0 or iv_hp_max > 31:
             self.iv_hp_var.set("N/A")
         else:
-            self.iv_hp_var.set(iv_hp)
+            self.iv_hp_var.set(f'{iv_hp_min} - {iv_hp_max}')
 
-        if iv_atk < 0 or iv_atk > 31:
+        if iv_atk_min < 0 or iv_atk_min > 31 or iv_atk_max < 0 or iv_atk_max > 31:
             self.iv_atk_var.set("N/A")
         else:
-            self.iv_atk_var.set(iv_atk)
+            self.iv_atk_var.set(f'{iv_atk_min} - {iv_atk_max}')
 
-        if iv_def < 0 or iv_def > 31:
+        if iv_def_min < 0 or iv_def_min > 31 or iv_def_max < 0 or iv_def_max > 31:
             self.iv_def_var.set("N/A")
         else:
-            self.iv_def_var.set(iv_def)
+            self.iv_def_var.set(f'{iv_def_min} - {iv_def_max}')
 
-        if iv_spatk < 0 or iv_spatk > 31:
+        if iv_spatk_min < 0 or iv_spatk_min > 31 or iv_spatk_max < 0 or iv_spatk_max > 31:
             self.iv_spatk_var.set("N/A")
         else:
-            self.iv_spatk_var.set(iv_spatk)
+            self.iv_spatk_var.set(f'{iv_spatk_min} - {iv_spatk_max}')
 
-        if iv_spdef < 0 or iv_spdef > 31:
+        if iv_spdef_min < 0 or iv_spdef_min > 31 or iv_spdef_max < 0 or iv_spdef_max > 31:
             self.iv_spdef_var.set("N/A")
         else:
-            self.iv_spdef_var.set(iv_spdef)
+            self.iv_spdef_var.set(f'{iv_spdef_min} - {iv_spdef_max}')
 
-        if iv_spd < 0 or iv_spd > 31:
+        if iv_spd_min < 0 or iv_spd_min > 31 or iv_spd_max < 0 or iv_spd_max > 31:
             self.iv_spd_var.set("N/A")
         else:
-            self.iv_spd_var.set(iv_spd)
+            self.iv_spd_var.set(f'{iv_spd_min} - {iv_spd_max}')
+        
 
         # set base stats to gui
         self.base_hp_var.set(base_hp)
@@ -534,14 +551,48 @@ class CalcIV(customtkinter.CTk):
 
 
     # calc hp IV
-    def CalcHp(self, stat_hp, base_hp, ev_hp, level):
+    def CalcIvHpMin(self, stat_hp, base_hp, ev_hp, level):
         iv_hp = ((stat_hp - 10) * 100) / level - 2*base_hp - ev_hp/4 - 100
         return iv_hp
     
     # calc other stats IV
-    def CalcStats(self, stat, base, ev, level):
+    def CalcIvStatsMin(self, stat, base, ev, level):
         iv = ((stat - 5) * 100) / level - 2 * base - ev/4
         return iv
+    
+    def CalcIvStatsMax(self, base, iv, ev, level, stat):
+        iv_max = iv
+        loop = True
+
+        while loop:
+            iv_max += 1
+            stat_max = int(((((2 * base + iv_max + (ev/4)) * level) / 100) + 5))
+
+            if stat_max > stat:
+                loop = False
+                iv_max -= 1
+            
+            else:
+                loop = True
+        
+        return iv_max
+
+    def CalcIvHpMax(self, base, iv, ev, level, stat):
+        iv_max = iv
+        loop = True
+
+        while loop:
+            iv_max += 1
+            stat_max = int((((2 * base + iv_max + (ev/4)) * level) / 100) + level + 10)
+
+            if stat_max > stat:
+                loop = False
+                iv_max -= 1
+            
+            else:
+                loop = True
+
+        return iv_max
 
 if __name__ == "__main__":
     app = CalcIV()
