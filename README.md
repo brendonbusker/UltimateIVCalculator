@@ -14,6 +14,6 @@ You'll find the .exe file at dist/main/UltimateIVCalculator.exe
 
 ***Do not move UltimateIVCalculator.exe from dist or it will not run, create a shortcut instead if you want to move it***
 
-Screenshot (as of v1.0-beta):
-![b 1 0](https://github.com/brendonbusker/UltimateIVCalculator/assets/95665048/58d7270c-509c-481e-b63e-edbed37c426c)
+Screenshot (as of v2.0-beta):
+<img width="1797" height="809" alt="ivcalc" src="https://github.com/user-attachments/assets/91eb28c4-de4e-47b5-a8f3-d534f668fada" />
 
