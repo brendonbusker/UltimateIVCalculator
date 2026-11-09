@@ -1,4 +1,5 @@
 # UltimateIVCalculator
+*NOTE: This project was a fun personal project and ended up being the foundation for a much better webapp I created, go check it out: https://brendonbusker.github.io/UltimateIVCalculator-Webapp/
 
 Welcome!
 
